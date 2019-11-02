@@ -9,11 +9,13 @@ public class Map : MonoBehaviour
 
     // Start is called before the first frame update
     public Dictionary<string, Building> buildings;
+    public BuildingScript prefab;
 
     void Start()
     {
         this.buildings = new Dictionary<string, Building>();
-        this.getData();       
+        this.getData();
+        this.populateMap();       
     }
 
     private void getData () {
@@ -92,6 +94,20 @@ public class Map : MonoBehaviour
                 }
 
             }
+        }
+    }
+
+    private void populateMap() {
+        foreach (var building in buildings) {
+            BuildingScript BS = Instantiate<BuildingScript>(prefab);
+            BS.data = building.Value;
+
+            //scale the latitude and lonitude
+            float x = (((float) building.Value.latitude) % 1) * 5000;
+            float z = (((float) building.Value.longitude) % 1) * 5000;
+
+            Vector3 pos = new Vector3(x, 0.0f, z);
+            BS.gameObject.transform.position = pos;
         }
     }
 
