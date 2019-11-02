@@ -6,6 +6,7 @@ using System.IO;
 public class Map : MonoBehaviour
 {
     public string config_path = "Assets/Data/HackathonConfig.csv";
+    public string daily_path = "Assets/Data/HackathonDataDaily.csv";
 
     // Start is called before the first frame update
     public Dictionary<string, Building> buildings;
@@ -16,11 +17,12 @@ public class Map : MonoBehaviour
     void Start()
     {
         this.buildings = new Dictionary<string, Building>();
+        this.getConfig();
         this.getData();
         this.populateMap();       
     }
 
-    private void getData () {
+    private void getConfig () {
         using (var reader = new StreamReader("Assets/Data/HackathonConfig.csv"))
         {   
             var num = 0;
@@ -31,20 +33,25 @@ public class Map : MonoBehaviour
                 string[] values = line.Split(',');
                 //get data
                 string name = values[5];
-                name.Trim('\"');
+                name = name.Trim('\"');
+
                 string lat_str = values[8];
                 lat_str = lat_str.Trim('\"');
+
                 string long_str = values[9];
                 long_str = long_str.Trim('\"');
-                string campus = values[10];
+
                 string purpose = values[12];
+                purpose = purpose.Trim('\"');
+
+                string meter = values[1];
+                meter = meter.Trim('\"');
 
                 Resource resource;
 
                 string res_str = values[4];
                 res_str.Trim('\"');
                 // get Resource and Unit
-                //Debug.Log(res_str);
 
                 if (res_str.Equals("\"Heating Hot Water\""))
                 {
@@ -88,7 +95,7 @@ public class Map : MonoBehaviour
                 if (!this.buildings.ContainsKey(name))
                 {
                     //put it indictionary
-                    Building building = new Building(name, latitude, longitude, resource, purpose);
+                    Building building = new Building(name, latitude, longitude, resource, purpose, meter);
                     this.buildings.Add(name, building);
                 }
                 else
@@ -100,6 +107,46 @@ public class Map : MonoBehaviour
             }
         }
     }
+
+    private void getData () {
+        using (var reader = new StreamReader(daily_path)) {
+            string currentMeterId = "";
+            while (!reader.EndOfStream) {
+                string line = reader.ReadLine();
+                string[] values = line.Split(',');
+
+                string status_str = values[6];
+                status_str = status_str.Trim('\"');
+                if (isReliable(status_str)) {
+                    string newMeterID = values[0];
+                    newMeterID = newMeterID.Trim('\"');
+                    if (!newMeterID.Equals(currentMeterId)) {
+                        currentMeterId = newMeterID;
+                    }
+
+                    foreach (KeyValuePair<string, Building> entry in this.buildings) {
+                        if (entry.Value.meterID.Equals(currentMeterId)) {
+                            string energyStr = values[1];
+                            energyStr = energyStr.Trim('\"');
+                            double energyUsage = double.Parse(energyStr);
+                            if (entry.Value.largestDailyValue < energyUsage) {
+                                entry.Value.largestDailyValue = energyUsage;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    private bool isReliable (string status) {
+        bool relaiable = false;
+        if (status.Equals("OK")) {
+            relaiable = true;
+        }
+        return relaiable;
+    }   
 
     private void populateMap() {
         foreach (var building in buildings) {
