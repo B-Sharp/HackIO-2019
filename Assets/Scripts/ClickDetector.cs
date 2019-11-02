@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class ClickDetector : MonoBehaviour
 {
 
     public GameObject UI;
     public float rotationSpeed = 2.0f;
     public float orbitSpeed = 10000.0f;
-    public float flySpeed = 1000f;
+    public float flyInsSpeed = 1000f;
     public float radius = 5.0f;
 
     private Transform target;
@@ -24,6 +23,9 @@ public class ClickDetector : MonoBehaviour
         if (obj.tag == "Building") {
            this.target = obj.transform;
            this.targetOrbit = new Vector3(this.target.position.x, this.target.position.y + 1f * this.target.lossyScale.y, this.target.position.z);
+           float planarDistance = (transform.position.x - this.target.position.x) * (transform.position.x - this.target.position.x) + (transform.position.x - this.target.position.x) * (transform.position.z - this.target.position.z);
+           planarDistance = Mathf.Sqrt(planarDistance);
+           this.flyInsSpeed = 1000f * planarDistance * 100f;
         }
     } 
 
