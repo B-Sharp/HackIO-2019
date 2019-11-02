@@ -468,5 +468,5 @@ MonoBehaviour:
   UI: {fileID: 940314366}
   rotationSpeed: 2
   orbitSpeed: 10000
-  flySpeed: 1000
+  flyInsSpeed: 1000
   radius: 5
