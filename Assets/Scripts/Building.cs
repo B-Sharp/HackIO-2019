@@ -36,6 +36,6 @@ public class Building
     }
 
     public void setLargestDailyValue (double val) {
-        this.largestDailyValue = largestDailyValue;
+        this.largestDailyValue = val;
     }
 }
