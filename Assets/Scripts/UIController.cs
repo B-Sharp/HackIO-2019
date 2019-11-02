@@ -8,8 +8,8 @@ public class UIController : MonoBehaviour
     public Text UIText;
 
     public void updateUI(GameObject obj) {
-        Building buildingData = obj.GetComponent<Building>();
-        UIText.text = buildingData.name;
+        BuildingScript buildingData = obj.GetComponent<BuildingScript>();
+        UIText.text = buildingData.data.name;
     }
 
     // Start is called before the first frame update
