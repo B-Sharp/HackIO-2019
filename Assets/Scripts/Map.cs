@@ -10,6 +10,8 @@ public class Map : MonoBehaviour
     // Start is called before the first frame update
     public Dictionary<string, Building> buildings;
 
+    public const double INVALID_COORD = 1337.0;
+
     void Start()
     {
         this.buildings = new Dictionary<string, Building>();
@@ -18,9 +20,11 @@ public class Map : MonoBehaviour
 
     private void getData () {
         using (var reader = new StreamReader("Assets/Data/HackathonConfig.csv"))
-        {
+        {   
+            var num = 0;
             while (!reader.EndOfStream)
-            {
+            {   
+                num ++;
                 string line = reader.ReadLine();
                 string[] values = line.Split(',');
                 //get data
@@ -73,8 +77,8 @@ public class Map : MonoBehaviour
                 }
                 catch
                 {
-                    latitude = 0.0;
-                    longitude = 0.0;
+                    latitude = INVALID_COORD;
+                    longitude = INVALID_COORD;
                 }
 
 
