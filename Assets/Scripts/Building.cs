@@ -39,8 +39,8 @@ public class Building
     public List<Resource> resources;
     public string purpose;
     public string meterID;
-    public Reading currentReading;
-    public Reading previousReading;
+    public Reading currentReading = new Reading(System.DateTime.MinValue, "");
+    public Reading previousReading = new Reading(System.DateTime.MinValue, "");
 
     public Building (string name, double lat, double lon, Resource res, string purpose, string meterID) {
         this.name = name;
@@ -58,16 +58,7 @@ public class Building
 
     public void  addReading(string UTCDateTime, string readingValue) {
         Reading newReading = new Reading(UTCDateTime, readingValue);
-        if (this.previousReading.Equals(null)) {
-            this.previousReading = newReading;
-        } else if (this.currentReading.Equals(null)) {
-            if (this.previousReading.getReadingDate().CompareTo(newReading.getReadingDate()) < 0) {
-                this.currentReading = newReading;
-            } else {
-                this.currentReading = this.previousReading;
-                this.previousReading = newReading;
-            }
-        } else if (this.currentReading.getReadingDate().CompareTo(newReading.getReadingDate()) < 0) {
+        if (this.currentReading.getReadingDate().CompareTo(newReading.getReadingDate()) < 0) {
             this.previousReading = this.currentReading;
             this.currentReading = newReading;
         } else if (this.previousReading.getReadingDate().CompareTo(newReading.getReadingDate()) <= 0) {
@@ -118,7 +109,7 @@ public class Building
     }
 
     public bool hasElectricData () {
-        return (this.previousReading.Equals(null) && this.currentReading.Equals(null));
+        return (!this.previousReading.getReadingDate.Equals(System.DateTime.MinValue) && !this.currentReading.getReadingDate.Equals(System.DateTime.MinValue));
     }
 
     public double calculateLatestDailyConsumption() {
