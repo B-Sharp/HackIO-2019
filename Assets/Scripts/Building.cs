@@ -39,8 +39,8 @@ public class Building
     public List<Resource> resources;
     public string purpose;
     public string meterID;
-    public Reading currentReading = new Reading(System.DateTime.MinValue, "");
-    public Reading previousReading = new Reading(System.DateTime.MinValue, "");
+    public Reading currentReading = new Reading(System.DateTime.MinValue.ToString(), "");
+    public Reading previousReading = new Reading(System.DateTime.MinValue.ToString(), "");
 
     public Building (string name, double lat, double lon, Resource res, string purpose, string meterID) {
         this.name = name;
@@ -109,7 +109,7 @@ public class Building
     }
 
     public bool hasElectricData () {
-        return (!this.previousReading.getReadingDate.Equals(System.DateTime.MinValue) && !this.currentReading.getReadingDate.Equals(System.DateTime.MinValue));
+        return (!this.previousReading.getReadingDate().Equals(System.DateTime.MinValue) && !this.currentReading().getReadingDate.Equals(System.DateTime.MinValue));
     }
 
     public double calculateLatestDailyConsumption() {
