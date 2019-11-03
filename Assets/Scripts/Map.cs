@@ -53,19 +53,19 @@ public class Map : MonoBehaviour
                 res_str.Trim('\"');
                 // get Resource and Unit
 
-                if (res_str.Equals("\"Heating Hot Water\""))
+                if (res_str.Equals("Heating Hot Water"))
                 {
                     resource = Resource.HotWater;
                 }
-                else if (res_str.Equals("\"Chilled Water \""))
+                else if (res_str.Equals("Chilled Water "))
                 {
                     resource = Resource.ChilledWater;
                 }
-                else if (res_str.Equals("\"Steam\""))
+                else if (res_str.Equals("Steam"))
                 {
                     resource = Resource.Steam;
                 }
-                else if (res_str.Equals("\"Electricity\""))
+                else if (res_str.Equals("Electricity"))
                 {
                     resource = Resource.Electricity;
                 }
@@ -142,7 +142,7 @@ public class Map : MonoBehaviour
     private void populateMap() {
         foreach (var building in buildings) {
             BuildingScript BS = Instantiate<BuildingScript>(prefab);
-            BS.data = building.calculateLatestDailyConsumption();
+            BS.data = building.Value;
 
             //scale the latitude and lonitude
             float x = (float) ((40.1 - building.Value.latitude) * 5000.0) - 450f;

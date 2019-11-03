@@ -10,15 +10,15 @@ public enum Resource {
     Unknown = 4,
 }
 
-private class Reading {
-    private DateTime readingDate;
+public class Reading {
+    private System.DateTime readingDate;
     private double value;
 
-    Reading(string UTCDateTime, string readingValue) {
+    public Reading(string UTCDateTime, string readingValue) {
         int year = int.Parse(UTCDateTime.Substring(0,4));
-        int month = int.Parse(UTCDateTime.Substring(5,7));
-        int day = int.Parse(UTCDateTime.Substring(8,10));
-        this.readingDate = System.DateTime(year, month, day);
+        int month = int.Parse(UTCDateTime.Substring(5,2));
+        int day = int.Parse(UTCDateTime.Substring(8,2));
+        this.readingDate = new System.DateTime(year, month, day);
         this.value = double.Parse(readingValue);
     }
 
@@ -26,7 +26,7 @@ private class Reading {
         return this.value;
     }
 
-    public DateTime getReadingDate() {
+    public System.DateTime getReadingDate() {
         return this.readingDate;
     }
 }
@@ -57,7 +57,7 @@ public class Building
     }
 
     public void  addReading(string UTCDateTime, string readingValue) {
-        readingValue newReading = new Reading(UTCDateTime, readingValue);
+        Reading newReading = new Reading(UTCDateTime, readingValue);
         if (this.previousReading == null) {
             this.previousReading = newReading;
         } else if (this.currentReading == null) {
@@ -70,7 +70,7 @@ public class Building
         }
     }
 
-    private int daysApart(DateTime dt1, DateTime dt2) {
+    private int daysApart(System.DateTime dt1, System.DateTime dt2) {
         int result = 0;
         if (dt1.CompareTo(dt2) < 0) {
             while(dt1.CompareTo(dt2) < 0){
