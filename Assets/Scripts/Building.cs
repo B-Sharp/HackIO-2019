@@ -15,7 +15,7 @@ public class Reading {
     private double value;
 
     public Reading(string UTCDateTime, string readingValue) {
-        if (UTCDateTime.Equals("min")) {
+        if (UTCDateTime.Equals("min")){
             readingDate = System.DateTime.MinValue;
         } else{
             int year = int.Parse(UTCDateTime.Substring(0,4));
