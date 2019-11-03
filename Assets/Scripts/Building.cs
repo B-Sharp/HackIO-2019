@@ -81,7 +81,7 @@ public class Building
 
     private int daysApart(System.DateTime dt1, System.DateTime dt2) {
         int result = 0;
-        if (dt1.CompareTo(dt2) < 0) {
+        if (dt1.CompareTo(dt2) <= 0) {
             while(dt1.Day != dt2.Day){
                 result ++;
                 Debug.Log("1");
