@@ -123,15 +123,13 @@ public class Map : MonoBehaviour
                     if (!newMeterID.Equals(currentMeterId)) {
                         currentMeterId = newMeterID;
                     }
-                    if (values[5].Equals("\"kWh\"")) {
-                        foreach (KeyValuePair<string, Building> entry in this.buildings) {
-                            if (entry.Value.meterID.Equals(currentMeterId)) {
-                                string energyStr = values[1];
-                                energyStr = energyStr.Trim('\"');
-                                string dateString = values[3];
-                                dateString = dateString.Trim('\"');
-                                entry.Value.addReading(dateString, energyStr);
-                            }
+                    foreach (KeyValuePair<string, Building> entry in this.buildings) {
+                        if (entry.Value.meterID.Equals(currentMeterId)) {
+                            string energyStr = values[1];
+                            energyStr = energyStr.Trim('\"');
+                            string dateString = values[3];
+                            dateString = dateString.Trim('\"');
+                            entry.Value.addReading(dateString, energyStr);
                         }
                     }
                 }
