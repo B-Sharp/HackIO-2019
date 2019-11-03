@@ -117,7 +117,7 @@ public class Map : MonoBehaviour
 
                 string status_str = values[6];
                 status_str = status_str.Trim('\"');
-                if (isReliable(status_str)) {
+                if (status_str.Equals("OK")) {
                     string newMeterID = values[0];
                     newMeterID = newMeterID.Trim('\"');
                     if (!newMeterID.Equals(currentMeterId)) {
@@ -139,14 +139,6 @@ public class Map : MonoBehaviour
             }
         }
     }
-
-    private bool isReliable (string status) {
-        bool relaiable = false;
-        if (status.Equals("OK")) {
-            relaiable = true;
-        }
-        return relaiable;
-    }   
 
     private void populateMap() {
         foreach (var building in buildings) {
