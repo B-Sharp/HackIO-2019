@@ -109,7 +109,7 @@ public class Building
     }
 
     public bool hasElectricData () {
-        return (!this.previousReading.getReadingDate().Equals(System.DateTime.MinValue) && !this.currentReading().getReadingDate.Equals(System.DateTime.MinValue));
+        return (!this.previousReading.getReadingDate().Equals(System.DateTime.MinValue) && !this.currentReading.getReadingDate().Equals(System.DateTime.MinValue));
     }
 
     public double calculateLatestDailyConsumption() {
