@@ -72,15 +72,15 @@ public class Building
 
     private int daysApart(System.DateTime dt1, System.DateTime dt2) {
         int result = 0;
-        if (dt1.CompareTo(dt2) > 0) {
+        if (dt1.CompareTo(dt2) < 0) {
             while(dt1.Day != dt2.Day){
                 result ++;
                 Debug.Log("1");
-                dt1.AddDays(1);
+                dt1 = dt1.AddDays(1);
             } while(dt1.Month != dt2.Month) {
                 Debug.Log("2");
                 result += System.DateTime.DaysInMonth(dt1.Month);
-                dt1.AddMonths(1);
+                dt1 = dt1.AddMonths(1);
             } while(dt1.Year != dt2.Year) {
                 Debug.Log("3");
                 if (System.DateTime.IsLeapYear(dt1.Year)) {
@@ -88,17 +88,17 @@ public class Building
                 } else {
                     result += 365;
                 }
-                dt1.AddYears(1);
+                dt1 = dt1.AddYears(1);
             }
-        } else if(dt2.CompareTo(dt1) > 0) {
+        } else if(dt2.CompareTo(dt1) < 0) {
             while(dt1.Day != dt2.Day){
                 Debug.Log("4");
                 result ++;
-                dt2.AddDays(1);
+                dt2 = dt2.AddDays(1);
             } while(dt1.Month != dt2.Month) {
                 Debug.Log("5");
                 result += System.DateTime.DaysInMonth(dt2.Month);
-                dt2.AddMonths(1);
+                dt2 = dt2.AddMonths(1);
             } while(dt1.Year != dt2.Year) {
                 Debug.Log("6");
                 if (System.DateTime.IsLeapYear(dt2.Year)) {
@@ -106,7 +106,7 @@ public class Building
                 } else {
                     result += 365;
                 }
-                dt2.AddYears(1);
+                dt2 = dt2.AddYears(1);
             }
         }
         return result;
