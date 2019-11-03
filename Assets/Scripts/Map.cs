@@ -128,10 +128,9 @@ public class Map : MonoBehaviour
                         if (entry.Value.meterID.Equals(currentMeterId)) {
                             string energyStr = values[1];
                             energyStr = energyStr.Trim('\"');
-                            double energyUsage = double.Parse(energyStr);
-                            if (entry.Value.largestDailyValue < energyUsage) {
-                                entry.Value.largestDailyValue = energyUsage;
-                            }
+                            string dateString = values[3];
+                            dateString = dateString.Trim('\"');
+                            entry.Value.addReading(dateString, energyStr);
                         }
                     }
 
@@ -143,7 +142,7 @@ public class Map : MonoBehaviour
     private void populateMap() {
         foreach (var building in buildings) {
             BuildingScript BS = Instantiate<BuildingScript>(prefab);
-            BS.data = building.Value;
+            BS.data = building.calculateLatestDailyConsumption();
 
             //scale the latitude and lonitude
             float x = (float) ((40.1 - building.Value.latitude) * 5000.0) - 450f;
