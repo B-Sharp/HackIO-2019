@@ -12,18 +12,25 @@ public class UIController : MonoBehaviour
     public Text UIGas;
     public GameObject UICompass;
 
+    public string PPWithCommas (string s) {
+        int i = 3;
+        while(i < s.Length) {
+            s = s.Insert(s.Length - i, ",");
+            s +=4;
+        }
+    }
+
     public void updateUI(GameObject obj) {
         BuildingScript buildingData = obj.GetComponent<BuildingScript>();
         Debug.Log(buildingData.data.name);
         UIText.text = buildingData.data.name;
         UIPurpose.text = buildingData.data.purpose;
 
-        if (buildingData.data.hasElectricData()) {
-            double comsumption = System.Math.Truncate(buildingData.data.calculateLatestDailyConsumption());
-            UIkWh.text = comsumption.ToString();
-            UIBTU.text = (comsumption * 3412.0).ToString();
-            UIGas.text = (System.Math.Truncate(comsumption / 33.4)).ToString();
-        }
+        double comsumption = System.Math.Truncate(buildingData.data.calculateLatestDailyConsumption());
+        UIkWh.text = PPWithCommas(comsumption.ToString());
+        UIBTU.text = PPWithCommas((comsumption * 3412.0).ToString());
+        UIGas.text = PPWithCommas((System.Math.Truncate(comsumption / 33.4)).ToString());
+
     }
 
     public void updateCompass (Transform camera) {
