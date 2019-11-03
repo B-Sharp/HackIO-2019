@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
         int i = 3;
         while(i < s.Length) {
             s = s.Insert(s.Length - i, ",");
-            s +=4;
+            i +=4;
         }
         return s;
     }
