@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour
 
         double comsumption = System.Math.Truncate(buildingData.data.calculateLatestDailyConsumption());
         UIkWh.text = comsumption.ToString();
-        Debug.Log();
+        Debug.Log(buildingData.data.hasElectricData());
         UIBTU.text = (comsumption * 3412.0).ToString();
         UIGas.text = (System.Math.Truncate(comsumption / 33.4)).ToString();
 
