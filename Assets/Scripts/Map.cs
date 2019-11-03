@@ -51,29 +51,31 @@ public class Map : MonoBehaviour
 
                 string res_str = values[4];
                 res_str.Trim('\"');
-                // get Resource and Unit
 
-                if (res_str.Equals("Heating Hot Water"))
-                {
-                    resource = Resource.HotWater;
-                }
-                else if (res_str.Equals("Chilled Water "))
-                {
-                    resource = Resource.ChilledWater;
-                }
-                else if (res_str.Equals("Steam"))
-                {
-                    resource = Resource.Steam;
-                }
-                else if (res_str.Equals("Electricity"))
+                // // get Resource and Unit
+
+                // if (res_str.Equals("Heating Hot Water"))
+                // {
+                //     resource = Resource.HotWater;
+                // }
+                // else if (res_str.Equals("Chilled Water "))
+                // {
+                //     resource = Resource.ChilledWater;
+                // }
+                // else if (res_str.Equals("Steam"))
+                // {
+                //     resource = Resource.Steam;
+                // }
+                if (res_str.Equals("Electricity"))
                 {
                     resource = Resource.Electricity;
                 }
                 else
-                {
-                    resource = Resource.Unknown;
-                    Debug.Log("Unknow source");
-                    Debug.Log("unknown source: " + res_str);
+                {   
+                    continue;
+                    // resource = Resource.Unknown;
+                    // Debug.Log("Unknow source");
+                    // Debug.Log("unknown source: " + res_str);
                 }
 
                 // get lat and lon
@@ -148,7 +150,7 @@ public class Map : MonoBehaviour
             float x = (float) ((40.1 - building.Value.latitude) * 5000.0) - 350f;
             float y = (float) ((-83.03 - building.Value.longitude) * 5000.0) + 50f;
 
-            Vector3 pos = new Vector3(y, 0.0f, x);
+            Vector3 pos = new Vector3(y, 0.4f, x);
             BS.gameObject.transform.position = pos;
         }
     }

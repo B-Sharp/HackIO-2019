@@ -18,12 +18,12 @@ public class UIController : MonoBehaviour
         UIText.text = buildingData.data.name;
         UIPurpose.text = buildingData.data.purpose;
 
-        double comsumption = System.Math.Truncate(buildingData.data.calculateLatestDailyConsumption());
-        UIkWh.text = comsumption.ToString();
-        Debug.Log(buildingData.data.hasElectricData());
-        UIBTU.text = (comsumption * 3412.0).ToString();
-        UIGas.text = (System.Math.Truncate(comsumption / 33.4)).ToString();
-
+        if (buildingData.data.hasElectricData()) {
+            double comsumption = System.Math.Truncate(buildingData.data.calculateLatestDailyConsumption());
+            UIkWh.text = comsumption.ToString();
+            UIBTU.text = (comsumption * 3412.0).ToString();
+            UIGas.text = (System.Math.Truncate(comsumption / 33.4)).ToString();
+        }
     }
 
     public void updateCompass (Transform camera) {
