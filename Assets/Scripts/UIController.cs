@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour
             s = s.Insert(s.Length - i, ",");
             s +=4;
         }
+        return s;
     }
 
     public void updateUI(GameObject obj) {
