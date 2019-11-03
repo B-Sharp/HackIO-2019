@@ -32,6 +32,7 @@ public class ClickDetector : MonoBehaviour
             UI.transform.GetChild(0).GetComponent<Text>().enabled = true;
             UI.transform.GetChild(1).GetComponent<Image>().enabled = true;
             UI.transform.GetChild(2).GetComponent<Text>().enabled = true;
+            UI.transform.GetChild(4).GetComponent<Text>().enabled = true;
         }
     } 
 
@@ -52,6 +53,7 @@ public class ClickDetector : MonoBehaviour
             UI.transform.GetChild(0).GetComponent<Text>().enabled = false;
             UI.transform.GetChild(1).GetComponent<Image>().enabled = false;
             UI.transform.GetChild(2).GetComponent<Text>().enabled = false;
+            UI.transform.GetChild(4).GetComponent<Text>().enabled = false;
          } else if (Input.GetMouseButton(2) && !this.rotateCamera) {
              look();
          }
