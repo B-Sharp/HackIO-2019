@@ -43,8 +43,8 @@ public class Building
     public List<Resource> resources;
     public string purpose;
     public string meterID;
-    public Reading currentReading = new Reading("min", "");
-    public Reading previousReading = new Reading("min", "");
+    public Reading currentReading = new Reading("min", "0.0");
+    public Reading previousReading = new Reading("min", "0.0");
 
     public Building (string name, double lat, double lon, Resource res, string purpose, string meterID) {
         this.name = name;
