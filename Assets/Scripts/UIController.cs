@@ -8,6 +8,8 @@ public class UIController : MonoBehaviour
     public Text UIText;
     public Text UIPurpose;
     public Text UIkWh;
+    public Text UIBTU;
+    public Text UIGas;
     public GameObject UICompass;
 
     public void updateUI(GameObject obj) {
@@ -15,8 +17,13 @@ public class UIController : MonoBehaviour
         Debug.Log(buildingData.data.name);
         UIText.text = buildingData.data.name;
         UIPurpose.text = buildingData.data.purpose;
-        Debug.Log(buildingData.data.calculateLatestDailyConsumption().ToString());
-        UIkWh.text = buildingData.data.calculateLatestDailyConsumption().ToString();
+
+        double comsumption = System.Math.Truncate(buildingData.data.calculateLatestDailyConsumption());
+        UIkWh.text = comsumption.ToString();
+        Debug.Log();
+        UIBTU.text = (comsumption * 3412.0).ToString();
+        UIGas.text = (System.Math.Truncate(comsumption / 33.4)).ToString();
+
     }
 
     public void updateCompass (Transform camera) {
