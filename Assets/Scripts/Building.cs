@@ -61,7 +61,12 @@ public class Building
         if (this.previousReading == null) {
             this.previousReading = newReading;
         } else if (this.currentReading == null) {
-            this.currentReading = newReading;
+            if (this.previousReading.getReadingDate().CompareTo(newReading.getReadingDate()) < 0) {
+                this.currentReading = newReading;
+            } else {
+                this.currentReading = this.previousReading;
+                this.previousReading = newReading;
+            }
         } else if (this.currentReading.getReadingDate().CompareTo(newReading.getReadingDate()) < 0) {
             this.previousReading = this.currentReading;
             this.currentReading = newReading;
@@ -113,7 +118,7 @@ public class Building
     }
 
     public double calculateLatestDailyConsumption() {
-        double consumed = this.currentReading.getValue() - this.previousReading.getValue();
+        double consumed = Math.Abs(this.currentReading.getValue() - this.previousReading.getValue());
         int daysElapsed = this.daysApart(this.previousReading.getReadingDate(), this.currentReading.getReadingDate());
         return consumed/daysElapsed;
     }
