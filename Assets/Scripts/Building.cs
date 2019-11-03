@@ -15,7 +15,7 @@ public class Reading {
     private double value;
 
     public Reading(string UTCDateTime, string readingValue) {
-        if (UTCDateTime = "min") {
+        if (UTCDateTime.Equals("min")) {
             readingDate = System.DateTime.MinValue;
         } else{
             int year = int.Parse(UTCDateTime.Substring(0,4));
@@ -111,7 +111,7 @@ public class Building
         }
         return result;
     }
-    
+
     public bool hasElectricData () {
         return (!this.previousReading.getReadingDate().Equals(System.DateTime.MinValue) && !this.currentReading.getReadingDate().Equals(System.DateTime.MinValue));
     }
