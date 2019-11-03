@@ -62,7 +62,16 @@ public class Building
 
     public void  addReading(string UTCDateTime, string readingValue) {
         Reading newReading = new Reading(UTCDateTime, readingValue);
-        if (this.currentReading.getReadingDate().CompareTo(newReading.getReadingDate()) < 0) {
+        if (this.previousReading.getReadingDate.Equals(System.DateTime.Min)) {
+            this.previousReading = newReading;
+        } else if (this.currentReading.getReadingDate.Equals(System.DateTime.MinValue)) {
+            if(newReading.getReadingDate.CompareTo(this.previousReading) > 0) {
+                this.currentReading = newReading;
+            } else {
+                this.currentReading = this.previousReading;
+                this.previousReading = newReading;
+            }
+        } else if (this.currentReading.getReadingDate().CompareTo(newReading.getReadingDate()) < 0) {
             this.previousReading = this.currentReading;
             this.currentReading = newReading;
         } else if (this.previousReading.getReadingDate().CompareTo(newReading.getReadingDate()) <= 0) {
