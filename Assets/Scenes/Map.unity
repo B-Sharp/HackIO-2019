@@ -756,13 +756,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684469538}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1684469542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,8 +777,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 50395618}
   rotationSpeed: 1
-  orbitSpeed: 1
   flyInsSpeed: 1000
+  flySpeed: 10
   radius: 5
 --- !u!45 &1684469543
 Skybox:
