@@ -84,7 +84,7 @@ public class Building
                 dt1 = dt1.AddDays(1);
             } while(dt1.Month != dt2.Month) {
                 Debug.Log("2");
-                result += System.DateTime.DaysInMonth(dt1.Month);
+                result += System.DateTime.DaysInMonth(dt1.Year, dt1.Month);
                 dt1 = dt1.AddMonths(1);
             } while(dt1.Year != dt2.Year) {
                 Debug.Log("3");
@@ -102,7 +102,7 @@ public class Building
                 dt2 = dt2.AddDays(1);
             } while(dt1.Month != dt2.Month) {
                 Debug.Log("5");
-                result += System.DateTime.DaysInMonth(dt2.Month);
+                result += System.DateTime.DaysInMonth(dt2.Year, dt2.Month);
                 dt2 = dt2.AddMonths(1);
             } while(dt1.Year != dt2.Year) {
                 Debug.Log("6");

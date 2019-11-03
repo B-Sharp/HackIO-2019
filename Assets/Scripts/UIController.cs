@@ -15,7 +15,8 @@ public class UIController : MonoBehaviour
         Debug.Log(buildingData.data.name);
         UIText.text = buildingData.data.name;
         UIPurpose.text = buildingData.data.purpose;
-        //UIkWh.text = buildingData.data.calculateLatestDailyConsumption().ToString();
+        Debug.Log(buildingData.data.calculateLatestDailyConsumption().ToString());
+        UIkWh.text = buildingData.data.calculateLatestDailyConsumption().ToString();
     }
 
     public void updateCompass (Transform camera) {
@@ -27,6 +28,7 @@ public class UIController : MonoBehaviour
     {
         UIText.text = "Lorem ipsum";
         UIPurpose.text = "Lorem ipsum";
+        UIkWh.text = "Lorem ipsum";
     }
 
 }
