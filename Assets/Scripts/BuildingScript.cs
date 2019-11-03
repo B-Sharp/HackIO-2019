@@ -5,4 +5,9 @@ using UnityEngine;
 public class BuildingScript : MonoBehaviour
 {
     public Building data;
+    public string buildingName;
+
+    public void Start() {
+        buildingName = data.name;
+    }
 }
