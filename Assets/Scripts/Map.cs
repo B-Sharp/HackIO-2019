@@ -53,19 +53,19 @@ public class Map : MonoBehaviour
                 res_str.Trim('\"');
                 // get Resource and Unit
 
-                if (res_str.Equals("\"Heating Hot Water\""))
+                if (res_str.Equals("Heating Hot Water"))
                 {
                     resource = Resource.HotWater;
                 }
-                else if (res_str.Equals("\"Chilled Water \""))
+                else if (res_str.Equals("Chilled Water "))
                 {
                     resource = Resource.ChilledWater;
                 }
-                else if (res_str.Equals("\"Steam\""))
+                else if (res_str.Equals("Steam"))
                 {
                     resource = Resource.Steam;
                 }
-                else if (res_str.Equals("\"Electricity\""))
+                else if (res_str.Equals("Electricity"))
                 {
                     resource = Resource.Electricity;
                 }
@@ -128,10 +128,9 @@ public class Map : MonoBehaviour
                         if (entry.Value.meterID.Equals(currentMeterId)) {
                             string energyStr = values[1];
                             energyStr = energyStr.Trim('\"');
-                            double energyUsage = double.Parse(energyStr);
-                            if (entry.Value.largestDailyValue < energyUsage) {
-                                entry.Value.largestDailyValue = energyUsage;
-                            }
+                            string dateString = values[3];
+                            dateString = dateString.Trim('\"');
+                            entry.Value.addReading(dateString, energyStr);
                         }
                     }
 
