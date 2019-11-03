@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class ClickDetector : MonoBehaviour
 {
 
@@ -41,11 +42,17 @@ public class ClickDetector : MonoBehaviour
                 setTarget(hit.transform.gameObject);
                 this.rotateCamera = true;
                 UI.GetComponent<UIController>().updateUI(hit.transform.gameObject);
+                UI.transform.GetChild(0).GetComponent<Text>().enabled = true;
+                UI.transform.GetChild(1).GetComponent<Image>().enabled = true;
+                UI.transform.GetChild(2).GetComponent<Text>().enabled = true;
             }
          } else if (Input.GetMouseButtonDown(1)) {
              target = null;
              this.rotateCamera = false;
              transform.eulerAngles = this.originalAngles;
+            UI.transform.GetChild(0).GetComponent<Text>().enabled = false;
+            UI.transform.GetChild(1).GetComponent<Image>().enabled = false;
+            UI.transform.GetChild(2).GetComponent<Text>().enabled = false;
          }
 
          if (rotateCamera) {
