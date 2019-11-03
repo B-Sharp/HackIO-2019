@@ -58,9 +58,9 @@ public class Building
 
     public void  addReading(string UTCDateTime, string readingValue) {
         Reading newReading = new Reading(UTCDateTime, readingValue);
-        if (this.previousReading == null) {
+        if (this.previousReading.Equals(null)) {
             this.previousReading = newReading;
-        } else if (this.currentReading == null) {
+        } else if (this.currentReading.Equals(null)) {
             if (this.previousReading.getReadingDate().CompareTo(newReading.getReadingDate()) < 0) {
                 this.currentReading = newReading;
             } else {
@@ -118,7 +118,7 @@ public class Building
     }
 
     public bool hasElectricData () {
-        return (this.previousReading != null && this.currentReading != null);
+        return (this.previousReading.Equals(null) && this.currentReading.Equals(null));
     }
 
     public double calculateLatestDailyConsumption() {
