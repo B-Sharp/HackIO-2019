@@ -73,14 +73,34 @@ public class Building
     private int daysApart(System.DateTime dt1, System.DateTime dt2) {
         int result = 0;
         if (dt1.CompareTo(dt2) < 0) {
-            while(dt1.CompareTo(dt2) < 0){
+            while(dt1.Day != dt2.Day){
                 result ++;
                 dt1.AddDays(1);
+            } while(dt1.Month != dt2.Month) {
+                result += System.DateTime.DaysInMonth(dt1.Month);
+                dt1.AddMonths(1);
+            } while(dt1.Year != dt2.Year) {
+                if (System.DateTime.IsLeapYear(dt1.Year)) {
+                    result += 366;
+                } else {
+                    result += 365;
+                }
+                dt1.AddYears(1);
             }
         } else if(dt2.CompareTo(dt1) < 0) {
-            while (dt2.CompareTo(dt1) < 0) {
+            while(dt1.Day != dt2.Day){
                 result ++;
                 dt2.AddDays(1);
+            } while(dt1.Month != dt2.Month) {
+                result += System.DateTime.DaysInMonth(dt2.Month);
+                dt2.AddMonths(1);
+            } while(dt1.Year != dt2.Year) {
+                if (System.DateTime.IsLeapYear(dt2.Year)) {
+                    result += 366;
+                } else {
+                    result += 365;
+                }
+                dt2.AddYears(1);
             }
         }
         return result;
