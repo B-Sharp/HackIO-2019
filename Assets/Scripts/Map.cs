@@ -145,7 +145,7 @@ public class Map : MonoBehaviour
             BS.data = building.Value;
 
             //scale the latitude and lonitude
-            float x = (float) ((40.1 - building.Value.latitude) * 5000.0) - 450f;
+            float x = (float) ((40.1 - building.Value.latitude) * 5000.0) - 350f;
             float y = (float) ((-83.03 - building.Value.longitude) * 5000.0) + 50f;
 
             Vector3 pos = new Vector3(y, 0.0f, x);

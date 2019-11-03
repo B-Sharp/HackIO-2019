@@ -118,7 +118,7 @@ public class Building
     }
 
     public double calculateLatestDailyConsumption() {
-        double consumed = Math.Abs(this.currentReading.getValue() - this.previousReading.getValue());
+        double consumed = System.Math.Abs(this.currentReading.getValue() - this.previousReading.getValue());
         int daysElapsed = this.daysApart(this.previousReading.getReadingDate(), this.currentReading.getReadingDate());
         return consumed/daysElapsed;
     }
