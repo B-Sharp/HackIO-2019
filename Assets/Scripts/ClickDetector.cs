@@ -7,17 +7,17 @@ public class ClickDetector : MonoBehaviour
 
     public GameObject UI;
     public float rotationSpeed = 2.0f;
-    public float orbitSpeed = 10000.0f;
     public float flyInsSpeed = 1000f;
+    public float flySpeed = 10f;
     public float radius = 5.0f;
 
     private Transform target;
     private Vector3 targetOrbit;
-    private Vector3 originalAngles;
+    private float X;
+    private float Y;
     private bool rotateCamera = false;
 
     void Start () {
-        this.originalAngles = transform.eulerAngles;
     }
 
     public void setTarget (GameObject obj) {
@@ -27,6 +27,11 @@ public class ClickDetector : MonoBehaviour
            float planarDistance = (transform.position.x - this.target.position.x) * (transform.position.x - this.target.position.x) + (transform.position.x - this.target.position.x) * (transform.position.z - this.target.position.z);
            planarDistance = Mathf.Sqrt(planarDistance);
            this.flyInsSpeed = 1000f * planarDistance * 100f;
+            this.rotateCamera = true;
+            UI.GetComponent<UIController>().updateUI(obj.transform.gameObject);
+            UI.transform.GetChild(0).GetComponent<Text>().enabled = true;
+            UI.transform.GetChild(1).GetComponent<Image>().enabled = true;
+            UI.transform.GetChild(2).GetComponent<Text>().enabled = true;
         }
     } 
 
@@ -40,32 +45,58 @@ public class ClickDetector : MonoBehaviour
             if( Physics.Raycast( ray, out hit, 100 ) )
             {   
                 setTarget(hit.transform.gameObject);
-                this.rotateCamera = true;
-                UI.GetComponent<UIController>().updateUI(hit.transform.gameObject);
-                UI.transform.GetChild(0).GetComponent<Text>().enabled = true;
-                UI.transform.GetChild(1).GetComponent<Image>().enabled = true;
-                UI.transform.GetChild(2).GetComponent<Text>().enabled = true;
             }
          } else if (Input.GetMouseButtonDown(1)) {
              target = null;
              this.rotateCamera = false;
-             transform.eulerAngles = this.originalAngles;
             UI.transform.GetChild(0).GetComponent<Text>().enabled = false;
             UI.transform.GetChild(1).GetComponent<Image>().enabled = false;
             UI.transform.GetChild(2).GetComponent<Text>().enabled = false;
+         } else if (Input.GetMouseButton(2) && !this.rotateCamera) {
+             look();
          }
 
          if (rotateCamera) {
              rotateTowardsAngleSmooth();
              rotateAroundTarget();
+         } else {
+            getInput();
          }
+    }
+
+    private void look(){
+        transform.Rotate(new Vector3(-Input.GetAxis("Mouse Y") * 3.0f, Input.GetAxis("Mouse X") * 3.0f, 0));
+        X = transform.rotation.eulerAngles.x;
+        Y = transform.rotation.eulerAngles.y;
+        transform.rotation = Quaternion.Euler(X, Y, 0);
+    }
+
+    private void getInput () {
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            flySpeed *= 2.0f;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        {
+            flySpeed /= 2.0f;
+        }
+
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            transform.Translate(Vector3.forward * this.flySpeed * Time.deltaTime * Input.GetAxis("Vertical"));
+        }
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            transform.Translate(Vector3.right * this.flySpeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+        }
     }
 
     private void rotateTowardsAngleSmooth () {
 
         Quaternion targetRotation = Quaternion.LookRotation(this.target.transform.position - transform.position);
-        // Smoothly rotate towards the target point.
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, this.rotationSpeed * Time.deltaTime);
+        
     }
 
     private void rotateAroundTarget () {
