@@ -15,10 +15,14 @@ public class Reading {
     private double value;
 
     public Reading(string UTCDateTime, string readingValue) {
-        int year = int.Parse(UTCDateTime.Substring(0,4));
-        int month = int.Parse(UTCDateTime.Substring(5,2));
-        int day = int.Parse(UTCDateTime.Substring(8,2));
-        this.readingDate = new System.DateTime(year, month, day);
+        if (UTCDateTime = "min") {
+            readingDate = System.DateTime.MinValue;
+        } else{
+            int year = int.Parse(UTCDateTime.Substring(0,4));
+            int month = int.Parse(UTCDateTime.Substring(5,2));
+            int day = int.Parse(UTCDateTime.Substring(8,2));
+            this.readingDate = new System.DateTime(year, month, day);
+        }
         this.value = double.Parse(readingValue);
     }
 
@@ -39,8 +43,8 @@ public class Building
     public List<Resource> resources;
     public string purpose;
     public string meterID;
-    public Reading currentReading = new Reading(System.DateTime.MinValue.ToString(), "");
-    public Reading previousReading = new Reading(System.DateTime.MinValue.ToString(), "");
+    public Reading currentReading = new Reading("min", "");
+    public Reading previousReading = new Reading("min", "");
 
     public Building (string name, double lat, double lon, Resource res, string purpose, string meterID) {
         this.name = name;
@@ -107,7 +111,7 @@ public class Building
         }
         return result;
     }
-
+    
     public bool hasElectricData () {
         return (!this.previousReading.getReadingDate().Equals(System.DateTime.MinValue) && !this.currentReading.getReadingDate().Equals(System.DateTime.MinValue));
     }
