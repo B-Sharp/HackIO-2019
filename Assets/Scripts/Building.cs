@@ -117,6 +117,10 @@ public class Building
         return result;
     }
 
+    public bool hasElectricData () {
+        return (this.previousReading != null && this.currentReading != null);
+    }
+
     public double calculateLatestDailyConsumption() {
         double consumed = Math.Abs(this.currentReading.getValue() - this.previousReading.getValue());
         int daysElapsed = this.daysApart(this.previousReading.getReadingDate(), this.currentReading.getReadingDate());
