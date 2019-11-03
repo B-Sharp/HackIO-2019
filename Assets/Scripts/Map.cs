@@ -123,17 +123,17 @@ public class Map : MonoBehaviour
                     if (!newMeterID.Equals(currentMeterId)) {
                         currentMeterId = newMeterID;
                     }
-
-                    foreach (KeyValuePair<string, Building> entry in this.buildings) {
-                        if (entry.Value.meterID.Equals(currentMeterId)) {
-                            string energyStr = values[1];
-                            energyStr = energyStr.Trim('\"');
-                            string dateString = values[3];
-                            dateString = dateString.Trim('\"');
-                            entry.Value.addReading(dateString, energyStr);
+                    if (values[5].Equals("kWh")) {
+                        foreach (KeyValuePair<string, Building> entry in this.buildings) {
+                            if (entry.Value.meterID.Equals(currentMeterId)) {
+                                string energyStr = values[1];
+                                energyStr = energyStr.Trim('\"');
+                                string dateString = values[3];
+                                dateString = dateString.Trim('\"');
+                                entry.Value.addReading(dateString, energyStr);
+                            }
                         }
                     }
-
                 }
             }
         }
@@ -145,7 +145,7 @@ public class Map : MonoBehaviour
             BS.data = building.Value;
 
             //scale the latitude and lonitude
-            float x = (float) ((40.1 - building.Value.latitude) * 5000.0) - 350f;
+            float x = (float) ((40.1 - building.Value.latitude) * 5000.0) - 450f;
             float y = (float) ((-83.03 - building.Value.longitude) * 5000.0) + 50f;
 
             Vector3 pos = new Vector3(y, 0.0f, x);
