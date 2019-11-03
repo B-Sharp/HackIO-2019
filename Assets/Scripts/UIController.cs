@@ -9,12 +9,16 @@ public class UIController : MonoBehaviour
     public Text UIText;
     public GameObject UIPurposeObject;
     public Text UIPurpose;
-    //public Image image;
+    public GameObject compass;
 
     public void updateUI(GameObject obj) {
         BuildingScript buildingData = obj.GetComponent<BuildingScript>();
         UIText.text = buildingData.data.name;
         UIPurpose.text = buildingData.data.purpose;
+    }
+
+    public void updateCompass (Transform camera) {
+        compass.transform.rotation = Quaternion.Euler(0, 0, camera.rotation.eulerAngles.y + 180f);
     }
 
     // Start is called before the first frame update

@@ -62,6 +62,8 @@ public class ClickDetector : MonoBehaviour
          } else {
             getInput();
          }
+
+        UI.GetComponent<UIController>().updateCompass(transform);
     }
 
     private void look(){
