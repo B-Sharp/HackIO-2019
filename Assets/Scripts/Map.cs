@@ -123,7 +123,7 @@ public class Map : MonoBehaviour
                     if (!newMeterID.Equals(currentMeterId)) {
                         currentMeterId = newMeterID;
                     }
-                    if (values[5].Equals("kWh")) {
+                    if (values[5].Equals("\"kWh\"")) {
                         foreach (KeyValuePair<string, Building> entry in this.buildings) {
                             if (entry.Value.meterID.Equals(currentMeterId)) {
                                 string energyStr = values[1];
